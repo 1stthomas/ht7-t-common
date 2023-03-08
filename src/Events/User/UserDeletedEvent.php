@@ -8,10 +8,12 @@ use Ht7FfhsBsct\Common\Events\Event;
 
 class UserDeletedEvent extends Event
 {
-    public string $type = Events::USER_DELETED;
+    public string $type;
+
+//    public string $type = Events::USER_DELETED;
 
     public function __construct(public readonly UserData $data)
     {
-
+        $this->type = Events::USER_DELETED;
     }
 }
