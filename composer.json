@@ -1,0 +1,20 @@
+{
+    "name": "1stthomas/ht7-ffhs-bsct-common",
+    "description": "Common library for bsc thesis services.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [{
+            "name": "Thomas Plüss",
+            "email": "thomas.pluess@students.ffhs.ch"
+        }],
+    "require": {
+        "php": "^8.1",
+        "illuminate/support": "^9.0.0"
+    },
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Ht7FfhsBsct\\Common\\": "src/"
+        }
+    }
+}
