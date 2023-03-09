@@ -13,7 +13,7 @@ abstract class AbstractRedisService
     public function addProcessedEvent(array $event): void
     {
         Redis::rpush(
-            $this->getServiceName() . '-' . EventFetchTypes::PROCESSED_EVENTS_KEY,
+            $this->getServiceName() . '-' . EventFetchTypes::PROCESSED_EVENTS_KEY->value,
             $event['id'],
         );
     }
@@ -27,7 +27,7 @@ abstract class AbstractRedisService
     }
     public function publish(Event $event): void
     {
-        Redis::xadd(EventFetchTypes::ALL_EVENTS_KEY, '*', [
+        Redis::xadd(EventFetchTypes::ALL_EVENTS_KEY->value, '*', [
             'event' => $event->toJson(),
             'service' => $this->getServiceName(),
             'createdAt' => now()->format('Y-m-d H:i:s')
@@ -36,7 +36,7 @@ abstract class AbstractRedisService
     protected function getEventsAfter(string $start): array
     {
         $events = Redis::xRange(
-                EventFetchTypes::ALL_EVENTS_KEY,
+                EventFetchTypes::ALL_EVENTS_KEY->value,
                 $start,
                 (int) Carbon::now()->valueOf()
         );
@@ -65,7 +65,7 @@ abstract class AbstractRedisService
     private function getLastProcessedEventId(): string
     {
         $lastId = Redis::lindex(
-                $this->getServiceName() . '-' . EventFetchTypes::PROCESSED_EVENTS_KEY,
+                $this->getServiceName() . '-' . EventFetchTypes::PROCESSED_EVENTS_KEY->value,
                 -1,
         );
 

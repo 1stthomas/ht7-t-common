@@ -14,6 +14,6 @@ class UserDeletedEvent extends Event
 
     public function __construct(public readonly UserData $data)
     {
-        $this->type = Events::USER_DELETED;
+        $this->type = Events::USER_DELETED->value;
     }
 }
